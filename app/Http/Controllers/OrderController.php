@@ -102,7 +102,7 @@ class OrderController extends Controller
 
     public function home()
         {
-            return view('pages.home');
+            return view('pages.beranda.index');
         }
 
     public function about()

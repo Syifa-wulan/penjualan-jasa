@@ -2,13 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\OrderController;
+Route::get('/', function () {
+    return view('pages.beranda.index');
+})->name('pages.beranda.index');
 
-Route::get('/', [OrderController::class, 'home']);
-Route::get('/about', [OrderController::class, 'about']);
-Route::get('/services', [OrderController::class, 'services']);
-Route::get('/portfolio', [OrderController::class, 'portfolio']);
-Route::get('/order/{id}', [OrderController::class, 'invoice']);
-Route::get('/order', [OrderController::class, 'home']);
+Route::get('/products', function () {
+    return view('pages.products.index');
+})->name('pages.products.index');
 
-Route::match(['get','post'], '/order', [OrderController::class, 'order']);
+Route::get('/orders', function () {
+    return view('pages.orders.index');
+})->name('pages.orders.index');
+
+Route::get('/customers', function () {
+    return view('pages.customers.index');
+})->name('pages.customers.index');
