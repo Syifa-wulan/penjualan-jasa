@@ -15,6 +15,7 @@ class OrderController extends Controller
     {
         $products = Product::all();
         $orders = [];
+        $customer = null;
 
         // SIMPAN DATA
         if ($request->isMethod('post')) {
@@ -42,7 +43,8 @@ class OrderController extends Controller
             $order = Order::create([
                 'customer_id' => $customer->id,
                 'order_date' => now(),
-                'total' => 0
+                'total' => 0,
+                'status' => 'Pending'
             ]);
 
             $total = 0;
@@ -74,7 +76,7 @@ class OrderController extends Controller
 
             $order->update(['total' => $total]);
 
-            return redirect('/order?token=' . $customer->token);
+            return redirect('/order?token=' . $customer->token)->with('success', 'Pesanan berhasil dibuat! Berikut riwayat pesanan Anda.');
         }
 
         // AMBIL DATA BERDASARKAN TOKEN
@@ -82,41 +84,45 @@ class OrderController extends Controller
             $customer = Customer::where('token', $request->token)->first();
 
             if ($customer) {
-                $orders = Order::where('customer_id', $customer->id)->get();
+                $orders = Order::with('details.product')->where('customer_id', $customer->id)->latest()->get();
             }
         }
 
-        return view('pages.order', compact('products', 'orders'));
+        return view('pages.order', compact('products', 'orders', 'customer'));
+    }
+
+    public function index()
+    {
+        $orders = Order::with('customer', 'details.product')->latest()->paginate(10);
+        return view('pages.orders.index', compact('orders'));
     }
 
     public function invoice($id)
-        {
-            $order = Order::with(['customer', 'details.product'])->find($id);
-            
-            if (!$order) {
-                return redirect('/order');
-            }
-
-            return view('pages.order_detail', compact('order'));
+    {
+        // 1. Cari data order berdasarkan ID beserta data customernya
+        $order = Order::with('customer')->find($id);
+        
+        if (!$order) {
+            return redirect('/order')->with('error', 'Pesanan tidak ditemukan.');
         }
 
-    public function home()
-        {
-            return view('pages.beranda.index');
-        }
+        // 2. Ambil token dari customer yang punya orderan ini
+        $token = $order->customer->token;
 
-    public function about()
-        {
-            return view('pages.about');
-        }
+        // 3. REDIRECT (Alihkan) langsung ke halaman order utama dengan membawa tokennya
+        // Ditambah pesan sukses agar pelanggan tahu invoice mana yang sedang aktif
+        return redirect('/order?token=' . $token)->with('success', 'Menampilkan data pesanan #' . $order->id);
+    }
 
-    public function services()
-        {
-            return view('pages.services');
-        }
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:Pending,Review,Processing,Completed,Cancelled'
+        ]);
 
-    public function portfolio()
-        {
-            return view('pages.portfolio');
-        }
-}   
+        $order = Order::findOrFail($id);
+        $order->update(['status' => $request->status]);
+
+        return redirect()->back()->with('success', 'Status pesanan #' . $order->id . ' berhasil diubah menjadi ' . $request->status . '.');
+    }
+}

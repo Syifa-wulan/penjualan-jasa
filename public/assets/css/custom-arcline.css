@@ -1,0 +1,102 @@
+/* ==========================================================================
+   ARCLINE STUDIO PREMIUM CUSTOM STYLE (FRONTEND INTERACTIVE Suite)
+   ========================================================================== */
+
+/* 1. Efek Transisi Global untuk Seluruh Button Bootstrap */
+.btn {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Angkat Halus untuk Tombol Utama & Berwarna */
+.btn-primary:hover, .btn-success:hover, .btn-info:hover, .btn-warning:hover, .btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(103, 119, 239, 0.25) !important;
+}
+
+.btn-success:hover {
+    box-shadow: 0 5px 15px rgba(71, 195, 99, 0.25) !important;
+}
+
+.btn-danger:hover {
+    box-shadow: 0 5px 15px rgba(252, 84, 75, 0.25) !important;
+}
+
+.btn-warning:hover {
+    box-shadow: 0 5px 15px rgba(255, 164, 38, 0.25) !important;
+}
+
+/* Klik Aktif (Press Effect) untuk Semua Button */
+.btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* 2. Efek Hover Angkat & Bayangan Premium untuk Semua Card */
+.card {
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* Hover Angkat Khusus untuk Card Utama / Halaman Management */
+.product-card-hover:hover, 
+.customer-card:hover, 
+.card-stats-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(103, 119, 239, 0.12) !important;
+}
+
+/* Hover Halus untuk Default Card non-interaktif */
+.card:not(.card-statistic-1):hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* 3. Efek Focus Glow pada Input Form */
+.form-control {
+    transition: all 0.3s ease-in-out !important;
+}
+
+.form-control:focus {
+    border-color: #6777ef !important;
+    box-shadow: 0 0 0 3px rgba(103, 119, 239, 0.15) !important;
+}
+
+/* 4. Indikator Dot Status Online untuk Profil Pelanggan */
+.avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.online-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    background-color: #47c363;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 5. Garis Aksen Kiri Welcome Card */
+.welcome-border-custom {
+    border-left: 4px solid #6777ef !important;
+}
+
+/* 6. Pemisah Halus Baris List */
+.list-unstyled-border li {
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.list-unstyled-border li:last-child {
+    border-bottom: none;
+}
+
+/* 7. Hover pada Baris Tabel */
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(103, 119, 239, 0.03) !important;
+}
