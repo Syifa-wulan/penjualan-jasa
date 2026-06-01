@@ -9,7 +9,8 @@ class Order extends Model
     protected $fillable = [
         'customer_id',
         'order_date',
-        'total'
+        'total',
+        'status'
     ];
     public function details()
         {
