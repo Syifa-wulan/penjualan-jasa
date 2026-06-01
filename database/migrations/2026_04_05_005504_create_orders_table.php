@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->date('order_date');
             $table->integer('total');
+            $table->enum('status', ['Pending', 'Review', 'Processing', 'Completed', 'Cancelled'])->default('Pending');
             $table->timestamps();
         });
     }

@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('price');
+            $table->text('description')->nullable();
+            $table->integer('views')->default(0);
+            $table->decimal('rating', 3, 1)->default(5.0);
             $table->timestamps();
         });
     }
