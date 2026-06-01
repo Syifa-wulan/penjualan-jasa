@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from themewagon.github.io/stisla-1/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Feb 2026 01:32:10 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Blank Page &mdash; Stisla</title>
+  <title>@yield('title', 'Dashboard') &mdash; Arcline Studio</title>
 
-  <!-- General CSS Files -->
   <link rel="stylesheet" href="{{asset('')}}assets/modules/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{asset('')}}assets/modules/fontawesome/css/all.min.css">
 
-  <!-- CSS Libraries -->
-
-  <!-- Template CSS -->
   <link rel="stylesheet" href="{{asset('')}}assets/css/style.css">
   <link rel="stylesheet" href="{{asset('')}}assets/css/components.css">
-<!-- Start GA -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  
+  @stack('styles')
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'UA-94034622-3');
-</script>
-<!-- /END GA --></head>
+    gtag('config', 'UA-94034622-3');
+  </script>
+  </head>
 
 <body>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
-{{-- Navbar --}}
-@include('layouts.navbar')
+      {{-- Navbar --}}
+      @include('layouts.navbar')
 
-{{-- Sidebar --}}
-@include('layouts.sidebar')
+      {{-- Sidebar --}}
+      @include('layouts.sidebar')
 
-{{-- Main Content --}}
-@yield('content')
+      {{-- Main Content --}}
+      @yield('content')
 
-{{-- Footer --}}
-@include('layouts.footer')
+      {{-- Footer --}}
+      @include('layouts.footer')
+    </div>
+  </div>
 
-  <!-- General JS Scripts -->
   <script src="{{asset('')}}assets/modules/jquery.min.js"></script>
   <script src="{{asset('')}}assets/modules/popper.js"></script>
   <script src="{{asset('')}}assets/modules/tooltip.js"></script>
@@ -53,14 +50,10 @@
   <script src="{{asset('')}}assets/modules/moment.min.js"></script>
   <script src="{{asset('')}}assets/js/stisla.js"></script>
   
-  <!-- JS Libraies -->
-
-  <!-- Page Specific JS File -->
-  
-  <!-- Template JS File -->
   <script src="{{asset('')}}assets/js/scripts.js"></script>
   <script src="{{asset('')}}assets/js/custom.js"></script>
+
+  @stack('scripts')
 </body>
 
-<!-- Mirrored from themewagon.github.io/stisla-1/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Feb 2026 01:32:10 GMT -->
 </html>
